@@ -13,6 +13,7 @@ def route():
 
     if User.email_exists(email):
         return {
+            'success': False,
             'status': 'Conflict',
             'statusCode': 409,
             'message': 'User does already exist'
@@ -30,12 +31,14 @@ def route():
         user.create()
     except Exception as e:
         return {
+            'success': False,
             'status': 'Unknown error',
             'statusCode': 520,
             'message': 'User not created'
         }, 520
     else:
         return {
+            'success': True,
             'status': 'Success',
             'statusCode': 201,
             'message': 'User created'
