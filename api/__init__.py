@@ -3,6 +3,7 @@ from .routes.index import index
 from .routes.register import register
 from .routes.login import login
 from .routes.logout import logout
+from .routes.protected import protected
 from .models.users import db
 from .config import Development
 
@@ -15,6 +16,7 @@ api.register_blueprint(index)
 api.register_blueprint(register)
 api.register_blueprint(login)
 api.register_blueprint(logout)
+api.register_blueprint(protected)
 
 @api.before_first_request
 def initialize_database():
