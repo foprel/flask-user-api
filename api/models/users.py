@@ -1,5 +1,6 @@
 from hashlib import sha3_256
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -11,37 +12,29 @@ class User(db.Model):
     jwt_auth = db.Column(db.Boolean, unique=False, nullable=True, default=False)
 
     @classmethod
-    def email_exists(cls, email):
-        return cls.query.filter_by(email=email).first()
+    def get_by_username(cls, username):
+        return cls.query.filter_by(username=username).first()
 
     @classmethod
-    def id_exists(cls, id):
+    def get_by_email(cls, email):
+        return cls.query.filter_by(email=email).first()
+    
+    @classmethod
+    def get_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
 
-    @classmethod
     def hash_password(self, password):
-        #Todo: Set PYTHONHASHSEED environment variable
-        return sha3_256(password.encode()).hexdigest()
+        self.password = generate_password_hash(password)
 
-    @classmethod
-    def check_password(cls, password, email):
-        database = cls.query.filter_by(email=email).first().password
-        password = sha3_256(password.encode()).hexdigest()
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
-        if database == password:
-            return True
-        else:
-            return False
+    def set_jwt_auth(self, set_status):
+        self.jwt_auth = set_status
 
-    def create(self):
+    def check_jwt_auth(self):
+        return self.jwt_auth
+
+    def save(self):
         db.session.add(self)
         db.session.commit()
-    
-    def read():
-        raise NotImplementedError
-
-    def update():
-        raise NotImplementedError
-
-    def delete():
-        raise NotImplementedError
