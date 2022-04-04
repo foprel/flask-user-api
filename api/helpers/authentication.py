@@ -22,7 +22,15 @@ def token_required(f):
         try:
             payload = jwt.decode(token, Development.SECRET_KEY)
             email = payload['email']
-            exp = payload['exp']
+            exp = payload['exp'] 
+
+            user = User.get_by_email(email)
+
+            if not user:
+                return {
+                    'success': False,
+                    'message': 'User does not exist'
+                }, 400
 
         except Exception:
             return {
