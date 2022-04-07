@@ -38,3 +38,16 @@ class User(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+class TokenBlocklist(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    token = db.Column(db.String(), nullable=False)
+    created_at = db.Column(db.DateTime(), nullable=False)
+
+    @classmethod
+    def check_jwt_active(cls, token):
+        return cls.query.filter_by(token=token).first()
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
