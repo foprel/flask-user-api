@@ -2,3 +2,4 @@
 .gitignore
 README.md
 /venv
+/api/databases/api.db
