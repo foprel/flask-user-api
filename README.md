@@ -41,6 +41,6 @@ Output:
 Follow these steps to run the application in docker:
 
 ``` console
-docker build --tag flask-user-api
-docker run publish 5000:5000 flask-user-api
+docker build --tag flask-user-api .
+docker run --publish 5000:5000 flask-user-api
 ```
