@@ -6,7 +6,7 @@
 
 A simple [Flask](https://flask.palletsprojects.com/) User API that leverages [JSON Web Tokens](https://jwt.io/) for user authentication. [SQLite](https://www.sqlite.org/index.html) is used for persistent storage of user information.
 
-## Usage
+## Installation
 
 Input:
 
@@ -46,3 +46,8 @@ Follow these steps to run the application in docker:
 docker build --tag flask-user-api .
 docker run --publish 5000:5000 flask-user-api
 ```
+
+## Acknowledgements
+* [Flask](https://flask.palletsprojects.com/)
+* [JWT](https://jwt.io/)
+* [SQLite](https://www.sqlite.org/index.html)
