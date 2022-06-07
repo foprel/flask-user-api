@@ -1,5 +1,7 @@
 # Flask User API
 
+> :warning: **Security warning**: This project is experimental and provided as-is (see MIT license).
+
 ## Description
 
 A simple [Flask](https://flask.palletsprojects.com/) User API that leverages [JSON Web Tokens](https://jwt.io/) for user authentication. [SQLite](https://www.sqlite.org/index.html) is used for persistent storage of user information.
